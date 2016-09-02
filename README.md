@@ -3,6 +3,9 @@
 ## Description
 
 
+## Features
+
+* Slideshow in Fullscreen mode
 
 ## Setup
 
