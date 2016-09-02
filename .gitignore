@@ -1,0 +1,16 @@
+# IntelliJ
+/.idea
+*.iml
+
+# Netbeans
+/nbproject
+
+# Bower #
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+# Node JS
+node_modules
+npm-debug.log
