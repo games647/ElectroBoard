@@ -1,6 +1,8 @@
 const electron = require('electron')
+
+
 // Module to control application life.
-const app = electron.app
+const {app, globalShortcut} = require('electron')
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
@@ -15,6 +17,7 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
+  //hide the menu items for fullscreen usage
   mainWindow.setMenu(null)
 
   // Open the DevTools.
@@ -32,7 +35,19 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', function() {
+  createWindow()
+
+  app.on('browser-window-focus', function () {
+    globalShortcut.register('F11', function () {
+      mainWindow.setFullScreen(!mainWindow.isFullScreen())
+    });
+  });
+
+  app.on('browser-window-blur', function () {
+    globalShortcut.unregister('F11');
+  });
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
