@@ -16,3 +16,5 @@ bower_components
 node_modules
 npm-debug.log
 
+# Ignore project specific configs like API keys
+config.json

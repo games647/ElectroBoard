@@ -8,12 +8,34 @@ var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
 var http = require('http');
 var querystring = require('querystring');
+var request = require('request');
 
 var imageId = 1;
+
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 setInterval(updateSolarData, 5 * 1000)
 setInterval(updateTime, 1000)
 setInterval(nextSlide, 5 * 1000);
+
+updateWeather()
+
+function updateWeather() {
+    var apiKey = config['openweathermap-api'];
+    var city = config['weather-city'];
+    request('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric', function (error, response, body) {
+        if (error) {
+            return console.log('Error:', error);
+        }
+
+        if (response.statusCode !== 200) {
+            return console.log('Invalid Status Code Returned:', response.statusCode);
+        }
+
+        var temperature = JSON.parse(body).main.temp;
+        $("#temperature").text(temperature + "°C");
+    });
+}
 
 function updateSolarData() {
     var data = querystring.stringify({
@@ -30,7 +52,7 @@ function updateSolarData() {
         }
     };
 
-    var req = http.request(options, function(res) {
+    var req = http.request(options, function (res) {
         res.on('data', function (chunk) {
             var components = chunk.toString().split(/[|]+/);
 
@@ -51,8 +73,8 @@ function updateSolarData() {
     req.end();
 }
 
-setInterval(function() {
-    exec('"scripts/network-activity.py"', function(error, stdout, stderr) {
+setInterval(function () {
+    exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
         var components = stdout.split(/[ ,]+/);
 
         var upload = parseInt(components[0], 10) / 1000;

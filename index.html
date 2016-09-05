@@ -22,81 +22,85 @@
 </head>
 
 <body>
-    <!--<img id="slide" src="img/slideshow/1.png">-->
+<!--<img id="slide" src="img/slideshow/1.png">-->
 
-    <div id="status" class="container">
-        <div class="row">
-            <div id="map" class="col-xs-4 box">
-                <img src="">
-                <span>Time to target: 30min</span>
-            </div>
-            <div class="col-xs-8">
-                <div class="row">
-                    <div id="weather" class="col-xs-4 box">
-                        <img src="">
-                        <span id="temperature">30 °C</span>
-                    </div>
-                    <div id="timestamp" class="col-xs-8 box">
-                        <span id="date">DATE</span>
-                        <span id="time">TIME</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="freifunk" class="col-xs-4 box">
-                        <img src="img/freifunk.svg">
-                        <span>Nodes: 300 kB/s</span>
-                        <span>Today: 3GB</span>
-                    </div>
-                    <div class="col-xs-4 box network">
-                        <img src="img/download.png">
-                        <span id="download">Current: 300 kB/s</span>
-                        <span>Today: 3GB</span>
-                    </div>
-                    <div class="col-xs-4 box">
+<div id="status" class="container">
+    <div class="row">
+        <div id="map" class="col-xs-4 box two-row">
+            <iframe src="">
 
-                    </div>
-                </div>
-            </div>
+            </iframe>
         </div>
-        <div class="row">
-            <div id="solar" class="col-xs-7 box">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <img src="img/power.png">
-                        <span id="powerPct">0%</span>
-                        <span id="powerEnergy">0kW</span>
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="img/battery.png">
-                        <span id="batteryPct">100%</span>
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="img/transfer.png">
-                        <span id="transfer">3.8kW</span>
-                    </div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div id="weather" class="col-xs-4 box one-row">
+                    <img src="img/sun-cloud.png">
+                    <span id="temperature">0 °C</span>
+                </div>
+                <div id="timestamp" class="col-xs-8 box one-row">
+                    <span id="date">DATE</span>
+                    <span id="time">TIME</span>
                 </div>
             </div>
-            <div class="col-xs-3 box network">
-                <img src="img/upload.png">
-                <span id="upload">Current: 300 kB/s</span>
-                <span>Today: 3GB</span>
-            </div>
-            <div id="calendar-tommorrow" class="col-xs-2 box">
+            <div class="row">
+                <div id="freifunk" class="col-xs-4 box one-row">
+                    <img src="img/freifunk.svg">
+                    <span>Downstream: 300 kB/s</span>
+                    <span>Upstream: 3GB</span>
+                </div>
+                <div class="col-xs-4 box network one-row">
+                    <img src="img/download.png">
+                    <span id="download">Current: 300 kB/s</span>
+                    <span>Today: 3GB</span>
+                </div>
+                <div class="col-xs-4 box one-row">
 
+                </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div id="solar" class="col-xs-7 box one-row">
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="img/power.png">
+                    <span id="powerPct">0%</span>
+                    <span id="powerEnergy">0kW</span>
+                </div>
+                <div class="col-xs-4">
+                    <img src="img/battery.png">
+                    <span id="batteryPct">0%</span>
+                </div>
+                <div class="col-xs-4">
+                    <img src="img/transfer.png">
+                    <div>
+                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        <span id="transfer">0.0kW</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 box network one-row">
+            <img src="img/upload.png">
+            <span id="upload">Current: 300 kB/s</span>
+            <span>Today: 3GB</span>
+        </div>
+        <div class="col-xs-2 box one-row">
+
+        </div>
+    </div>
+</div>
 </body>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery = window.$ = module.exports;</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery = window.$ = module.exports;</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 <script>
     // You can also require other files to run in this process
     require('./js/renderer.js')
