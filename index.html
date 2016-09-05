@@ -22,7 +22,70 @@
 </head>
 
 <body>
-    <img id="slide" src="img/slideshow/2.png">
+    <!--<img id="slide" src="img/slideshow/1.png">-->
+
+    <div id="status" class="container">
+        <div class="row">
+            <div id="map" class="col-xs-4 box">
+                <img src="">
+                <span>Time to target: 30min</span>
+            </div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <div id="weather" class="col-xs-4 box">
+                        <img src="">
+                        <span id="temperature">30 °C</span>
+                    </div>
+                    <div id="timestamp" class="col-xs-8 box">
+                        <span id="date">DATE</span>
+                        <span id="time">TIME</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="freifunk" class="col-xs-4 box">
+                        <img src="img/freifunk.svg">
+                        <span>Nodes: 300 kB/s</span>
+                        <span>Today: 3GB</span>
+                    </div>
+                    <div class="col-xs-4 box network">
+                        <img src="img/download.png">
+                        <span id="download">Current: 300 kB/s</span>
+                        <span>Today: 3GB</span>
+                    </div>
+                    <div class="col-xs-4 box">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="solar" class="col-xs-7 box">
+                <div class="row">
+                    <div id="input" class="col-xs-4">
+                        <img src="img/input.png">
+                        <span>50%</span>
+                        <span>3.8kW</span>
+                    </div>
+                    <div id="battery" class="col-xs-4">
+                        <img src="img/battery.png">
+                        <span>100%</span>
+                    </div>
+                    <div id="output" class="col-xs-4">
+                        <img src="img/output.png">
+                        <span>3.8kW</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 box network">
+                <img src="img/upload.png">
+                <span id="upload">Current: 300 kB/s</span>
+                <span>Today: 3GB</span>
+            </div>
+            <div id="calendar-tommorrow" class="col-xs-2 box">
+
+            </div>
+        </div>
+    </div>
 </body>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

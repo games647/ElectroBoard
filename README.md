@@ -21,3 +21,4 @@ Run `npm start` or if you installed electron, you could just use `electron .`
 * NodeJS
 * Twitter Bootstrap
 * Electron
+* Images from pixabay
