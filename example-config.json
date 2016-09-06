@@ -1,5 +1,7 @@
 {
   "google-maps-api": "",
   "openweathermap-api": "",
-  "weather-city": "london"
+  "weather-city": "london",
+  "map-origin": "",
+  "map-destination": ""
 }

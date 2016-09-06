@@ -7,16 +7,13 @@
 
     <title>ElectroBoard</title>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
 
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -27,7 +24,7 @@
 <div id="status" class="container">
     <div class="row">
         <div id="map" class="col-xs-4 box two-row">
-            <iframe src="">
+            <iframe>
 
             </iframe>
         </div>
@@ -45,13 +42,12 @@
             <div class="row">
                 <div id="freifunk" class="col-xs-4 box one-row">
                     <img src="img/freifunk.svg">
-                    <span>Downstream: 300 kB/s</span>
-                    <span>Upstream: 3GB</span>
+                    <span>Downstream: 0 kB/s</span>
+                    <span>Upstream: 0 kB/s</span>
                 </div>
                 <div class="col-xs-4 box network one-row">
                     <img src="img/download.png">
-                    <span id="download">Current: 300 kB/s</span>
-                    <span>Today: 3GB</span>
+                    <span id="download">Current: 0 kB/s</span>
                 </div>
                 <div class="col-xs-4 box one-row">
 
@@ -63,18 +59,18 @@
         <div id="solar" class="col-xs-7 box one-row">
             <div class="row">
                 <div class="col-xs-4">
-                    <img src="img/power.png">
+                    <img src="img/panel-empty.png">
                     <span id="powerPct">0%</span>
                     <span id="powerEnergy">0kW</span>
                 </div>
                 <div class="col-xs-4">
-                    <img src="img/battery.png">
+                    <img src="img/battery-empty.png">
                     <span id="batteryPct">0%</span>
                 </div>
                 <div class="col-xs-4">
-                    <img src="img/transfer.png">
+                    <img src="img/transfer-empty.png">
                     <div>
-                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                        <span id="transferType" class="glyphicon" aria-hidden="true"></span>
                         <span id="transfer">0.0kW</span>
                     </div>
                 </div>
@@ -82,8 +78,7 @@
         </div>
         <div class="col-xs-3 box network one-row">
             <img src="img/upload.png">
-            <span id="upload">Current: 300 kB/s</span>
-            <span>Today: 3GB</span>
+            <span id="upload">Current: 0 kB/s</span>
         </div>
         <div class="col-xs-2 box one-row">
 
@@ -92,16 +87,15 @@
 </div>
 </body>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery = window.$ = module.exports;</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 <script>
+    //jQuery (necessary for Bootstrap's JavaScript plugins)
+    require('jquery')
+
+    window.jQuery = window.$ = module.exports;
+    require('bootstrap')
+
     // You can also require other files to run in this process
     require('./js/renderer.js')
 </script>

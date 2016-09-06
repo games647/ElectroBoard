@@ -30,11 +30,11 @@ div span {
 }
 
 .one-row {
-    height: 200px;
+    height: 220px;
 }
 
 .two-row {
-    height: 400px;
+    height: 440px;
 }
 
 #map iframe {
@@ -56,7 +56,8 @@ div span {
 .network img {
     height: 64px;
     width: 64px;
-    margin-bottom: 18px;
+    margin-top: 12px;
+    margin-bottom: 50px;
 }
 
 .network span {
@@ -65,8 +66,8 @@ div span {
 }
 
 #timestamp {
-    line-height: 2;
-    font-size: 37px;
+    line-height: 3;
+    font-size: 35px;
 }
 
 #calendar {

@@ -20,6 +20,11 @@ setInterval(nextSlide, 5 * 1000);
 
 updateWeather()
 
+var mapsAPI = config['google-maps-api'];
+var origin = config['map-origin'];
+var destination = config['map-destination'];
+// $("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
+
 function updateWeather() {
     var apiKey = config['openweathermap-api'];
     var city = config['weather-city'];
@@ -64,7 +69,14 @@ function updateSolarData() {
             var sufficient = components[5]
             var consume = components[6]
 
-            var type = components[7]
+            //either r for input or g for output
+            var transferType = components[7]
+            if (transferType == 'g') {
+                $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
+            } else {
+                $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
+            }
+
             $("#transfer").text(components[8]);
         });
     });
