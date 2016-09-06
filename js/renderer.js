@@ -12,7 +12,11 @@ var imageId = 1;
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 //components
-require('./freifunk.js')
+var freifunk = require('./freifunk.js');
+setInterval(function () {
+    freifunk.updateClientInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
+}, 1 * 60 * 1000);
+
 require('./solar.js')
 var weather = require('./weather.js')
 weather.updateWeather(config['openweathermap-api'], config['weather-city']);

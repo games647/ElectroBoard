@@ -1,5 +1,6 @@
 //imports
 var request = require('request');
+
 var exports = module.exports = {};
 
 exports.updateWeather = function(apiKey, city) {

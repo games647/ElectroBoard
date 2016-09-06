@@ -3,5 +3,9 @@
   "openweathermap-api": "",
   "weather-city": "london",
   "map-origin": "",
-  "map-destination": ""
+  "map-destination": "",
+  "freifunk-nodes": [
+
+  ],
+  "freifunk-stats-server": ""
 }

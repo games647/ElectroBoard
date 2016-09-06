@@ -13,6 +13,7 @@
 * Shows network stats (upstream/downstream) of your Fritzbox
 * Displays solar data (power, energy consume, battery, transfer to the energy provider)
 * Display the current time and date
+* Shows the current temperature
 
 ## Setup
 
