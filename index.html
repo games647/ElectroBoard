@@ -23,75 +23,86 @@
 
 <div id="status" class="container">
     <div class="row">
-        <div id="map" class="col-xs-4 box two-row">
-            <iframe>
-
-            </iframe>
-        </div>
-        <div class="col-xs-8">
+        <div class="col-xs-6">
             <div class="row">
-                <div id="weather" class="col-xs-4 box one-row">
-                    <img src="img/sun-cloud.png">
-                    <span id="temperature">0 °C</span>
+                <div id="map" class="col-xs-8 box two-row">
+                    <iframe>
+
+                    </iframe>
                 </div>
-                <div id="timestamp" class="col-xs-8 box one-row">
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div id="weather" class="col-xs-12 box one-row">
+                            <img src="img/sun-cloud.png">
+                            <span id="temperature">0 °C</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="freifunk" class="col-xs-12 box one-row">
+                            <img src="img/freifunk.svg">
+                            <span id="freifunk-clients">Clients: 0</span>
+                            <span id="freifunk-down">Downstream: 0 kB/s</span>
+                            <span id="freifunk-up">Upstream: 0 kB/s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="solar" class="col-xs-12 box one-row">
+                    <div id="panel" class="col-xs-4">
+                        <div class="solar-icon">
+                            <div style="background-image: url('img/panel-empty.png');"></div>
+                            <div style="background-image: url('img/panel-full.png');"></div>
+                        </div>
+                        <span id="powerPct">0%</span>
+                        <span id="powerEnergy">0kW</span>
+                    </div>
+                    <div id="battery" class="col-xs-4">
+                        <div class="solar-icon">
+                            <div style="background-image: url('img/battery-empty.png');"></div>
+                            <div style="background-image: url('img/battery-full.png');"></div>
+                        </div>
+                        <span id="batteryPct">0%</span>
+                    </div>
+                    <div id="transfer" class="col-xs-4">
+                        <div class="solar-icon">
+                            <div style="background-image: url('img/transfer-empty.png');"></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <span id="transferType" class="glyphicon" aria-hidden="true"></span>
+                            <span id="transferEnergy">0.0kW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="row">
+                <div id="timestamp" class="col-xs-12 box one-row">
                     <span id="date">DATE</span>
                     <span id="time">TIME</span>
                 </div>
             </div>
             <div class="row">
-                <div id="freifunk" class="col-xs-4 box one-row">
-                    <img src="img/freifunk.svg">
-                    <span id="freifunk-clients">Clients: 0</span>
-                    <span id="freifunk-down">Downstream: 0 kB/s</span>
-                    <span id="freifunk-up">Upstream: 0 kB/s</span>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-12 box one-row network">
+                            <img src="img/download.png">
+                            <span id="download">Current: 0 kB/s</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 box one-row network">
+                            <img src="img/upload.png">
+                            <span id="upload">Current: 0 kB/s</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-4 box network one-row">
-                    <img src="img/download.png">
-                    <span id="download">Current: 0 kB/s</span>
-                </div>
-                <div class="col-xs-4 box one-row">
+                <div class="col-xs-6 box two-row">
 
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="solar" class="col-xs-7 box one-row">
-            <div class="row">
-                <div id="panel" class="col-xs-4">
-                    <div class="solar-icon">
-                        <div style="background-image: url('img/panel-empty.png');"></div>
-                        <div style="background-image: url('img/panel-full.png');"></div>
-                    </div>
-                    <span id="powerPct">0%</span>
-                    <span id="powerEnergy">0kW</span>
-                </div>
-                <div id="battery" class="col-xs-4">
-                    <div class="solar-icon">
-                        <div style="background-image: url('img/battery-empty.png');"></div>
-                        <div style="background-image: url('img/battery-full.png');"></div>
-                    </div>
-                    <span id="batteryPct">0%</span>
-                </div>
-                <div id="transfer" class="col-xs-4">
-                    <div class="solar-icon">
-                        <div style="background-image: url('img/transfer-empty.png');"></div>
-                        <div></div>
-                    </div>
-                    <div>
-                        <span id="transferType" class="glyphicon" aria-hidden="true"></span>
-                        <span id="transferEnergy">0.0kW</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3 box network one-row">
-            <img src="img/upload.png">
-            <span id="upload">Current: 0 kB/s</span>
-        </div>
-        <div class="col-xs-2 box one-row">
-
         </div>
     </div>
 </div>
