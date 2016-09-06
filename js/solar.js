@@ -60,10 +60,9 @@ function updateSolarData() {
 }
 
 function updateSolarImage(id, pct) {
-    var imageHeight = 150 / 100 * pct;
-
-    if (imageHeight == 150) {
-        imageHeight = 0;
+    var imageHeight = 150 - 150 / 100 * pct;
+    if (imageHeight == 0) {
+        imageHeight = 150;
     }
 
     $("#" + id + " .solar-icon div:first-child").css('height', imageHeight + "px");
