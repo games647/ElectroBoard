@@ -6,110 +6,25 @@
 var fs = require('fs');
 var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
-var http = require('http');
-var querystring = require('querystring');
-var request = require('request');
 
 var imageId = 1;
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-setInterval(updateSolarData, 5 * 1000)
+//components
+require('./freifunk.js')
+require('./solar.js')
+var weather = require('./weather.js')
+weather.updateWeather(config['openweathermap-api'], config['weather-city']);
+
 setInterval(updateTime, 1000)
 setInterval(updateNetworkActivity, 3 * 1000)
 setInterval(nextSlide, 5 * 1000);
-
-updateWeather()
 
 var mapsAPI = config['google-maps-api'];
 var origin = config['map-origin'];
 var destination = config['map-destination'];
 // $("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
-
-function updateWeather() {
-    var apiKey = config['openweathermap-api'];
-    var city = config['weather-city'];
-    request('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric', function (error, response, body) {
-        if (error) {
-            return console.log('Error:', error);
-        }
-
-        if (response.statusCode !== 200) {
-            return console.log('Invalid Status Code Returned:', response.statusCode);
-        }
-
-        var temperature = JSON.parse(body).main.temp;
-        $("#temperature").text(temperature + "°C");
-    });
-}
-
-function updateSolarData() {
-    var data = querystring.stringify({
-        'action': 'get.hyb.overview'
-    });
-
-    var options = {
-        host: '192.168.0.75',
-        port: 80,
-        path: '/cgi-bin/ipcclient.fcgi?HjB7JutSh1n93DU',
-        method: 'POST',
-        headers: {
-            'Content-Length': Buffer.byteLength(data)
-        }
-    };
-
-    var req = http.request(options, function (res) {
-        res.on('data', function (chunk) {
-            var components = chunk.toString().split(/[|]+/);
-
-            var powerPct = parseFloat(components[1]);
-            $("#powerPct").text(powerPct + ' %');
-            $("#powerEnergy").text(components[2]);
-            updateSolarImage("panel", powerPct);
-
-            var batteryPct = parseFloat(components[3]);
-            $("#batteryPct").text(batteryPct + ' %');
-            updateSolarImage("battery", batteryPct);
-
-            var sufficient = components[5];
-            var consume = components[6];
-
-            //either r for input or g for output
-            var transferType = components[7];
-            if (transferType == 'g') {
-                //output
-                $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
-
-                updateSolarImage("transfer", 0);
-                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-output.png')");
-            } else {
-                //input
-                $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
-
-                updateSolarImage("transfer", 0);
-                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-input.png')");
-            }
-
-            $("#transferEnergy").text(components[8]);
-        });
-    });
-
-    req.write(data);
-    req.end();
-
-}
-
-function updateSolarImage(id, pct) {
-    var imageHeight = 150 / 100 * pct;
-
-    if (imageHeight == 150) {
-        imageHeight = 0;
-    }
-
-    $("#" + id + " .solar-icon div:first-child").css('height', imageHeight + "px");
-    $("#" + id + " .solar-icon div:nth-child(2)").css('height', 150 - imageHeight + "px");
-    $("#" + id + " .solar-icon div:nth-child(2)").css('background-position', '0px -' + imageHeight + "px");
-}
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {

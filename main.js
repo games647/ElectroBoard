@@ -14,7 +14,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1200, height: 600})
 
-  // and load the index.html of the app.
+  // and load the i.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`)
 
   //hide the menu items for fullscreen usage
