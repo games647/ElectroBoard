@@ -16,6 +16,7 @@ var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 setInterval(updateSolarData, 5 * 1000)
 setInterval(updateTime, 1000)
+setInterval(updateNetworkActivity, 3 * 1000)
 setInterval(nextSlide, 5 * 1000);
 
 updateWeather()
@@ -61,31 +62,56 @@ function updateSolarData() {
         res.on('data', function (chunk) {
             var components = chunk.toString().split(/[|]+/);
 
-            $("#powerPct").text(components[1] + ' %');
+            var powerPct = parseFloat(components[1]);
+            $("#powerPct").text(powerPct + ' %');
             $("#powerEnergy").text(components[2]);
+            updateSolarImage("panel", powerPct);
 
-            $("#batteryPct").text(components[3] + ' %');
+            var batteryPct = parseFloat(components[3]);
+            $("#batteryPct").text(batteryPct + ' %');
+            updateSolarImage("battery", batteryPct);
 
-            var sufficient = components[5]
-            var consume = components[6]
+            var sufficient = components[5];
+            var consume = components[6];
 
             //either r for input or g for output
-            var transferType = components[7]
+            var transferType = components[7];
             if (transferType == 'g') {
+                //output
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
+
+                updateSolarImage("transfer", 0);
+                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-output.png')");
             } else {
+                //input
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
+
+                updateSolarImage("transfer", 0);
+                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-input.png')");
             }
 
-            $("#transfer").text(components[8]);
+            $("#transferEnergy").text(components[8]);
         });
     });
 
     req.write(data);
     req.end();
+
 }
 
-setInterval(function () {
+function updateSolarImage(id, pct) {
+    var imageHeight = 150 / 100 * pct;
+
+    if (imageHeight == 150) {
+        imageHeight = 0;
+    }
+
+    $("#" + id + " .solar-icon div:first-child").css('height', imageHeight + "px");
+    $("#" + id + " .solar-icon div:nth-child(2)").css('height', 150 - imageHeight + "px");
+    $("#" + id + " .solar-icon div:nth-child(2)").css('background-position', '0px -' + imageHeight + "px");
+}
+
+function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
         var components = stdout.split(/[ ,]+/);
 
@@ -95,7 +121,7 @@ setInterval(function () {
         $("#upload").text("Current: " + upload + " kB/S");
         $("#download").text("Current: " + download + " kB/s");
     });
-}, 3 * 1000);
+}
 
 function nextSlide() {
     imageId++;

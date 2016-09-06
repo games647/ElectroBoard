@@ -53,6 +53,14 @@ div span {
     width: 128px;
 }
 
+.solar-icon {
+    display: inline-block;
+}
+
+.solar-icon div {
+    width: 128px;
+}
+
 .network img {
     height: 64px;
     width: 64px;

@@ -58,20 +58,41 @@
     <div class="row">
         <div id="solar" class="col-xs-7 box one-row">
             <div class="row">
-                <div class="col-xs-4">
-                    <img src="img/panel-empty.png">
+                <div id="panel" class="col-xs-4">
+                    <div class="solar-icon">
+                        <div style="background-image: url('img/panel-empty.png');">
+
+                        </div>
+                        <div style="background-image: url('img/panel-full.png');">
+
+                        </div>
+                    </div>
                     <span id="powerPct">0%</span>
                     <span id="powerEnergy">0kW</span>
                 </div>
-                <div class="col-xs-4">
-                    <img src="img/battery-empty.png">
+                <div id="battery" class="col-xs-4">
+                    <div class="solar-icon">
+                        <div style="background-image: url('img/battery-empty.png');">
+
+                        </div>
+                        <div style="background-image: url('img/battery-full.png');">
+
+                        </div>
+                    </div>
                     <span id="batteryPct">0%</span>
                 </div>
-                <div class="col-xs-4">
-                    <img src="img/transfer-empty.png">
+                <div id="transfer" class="col-xs-4">
+                    <div class="solar-icon">
+                        <div style="background-image: url('img/transfer-empty.png');">
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                     <div>
                         <span id="transferType" class="glyphicon" aria-hidden="true"></span>
-                        <span id="transfer">0.0kW</span>
+                        <span id="transferEnergy">0.0kW</span>
                     </div>
                 </div>
             </div>
