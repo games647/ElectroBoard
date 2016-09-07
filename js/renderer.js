@@ -7,7 +7,8 @@ var fs = require('fs');
 var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
 
-var imageId = 1;
+var imageId = 0;
+var isBoardShowing = true;
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
@@ -23,7 +24,30 @@ weather.updateWeather(config['openweathermap-api'], config['weather-city']);
 
 setInterval(updateTime, 1000)
 setInterval(updateNetworkActivity, 3 * 1000)
-setInterval(nextSlide, 5 * 1000);
+
+setInterval(function() {
+    if (isBoardShowing) {
+        imageId++;
+        var path = "img/slideshow/" + imageId + ".png";
+
+        if (!fs.existsSync(path)) {
+            //reset to the first id
+            imageId = 1;
+            path = "img/slideshow/" + imageId + ".png";
+        }
+
+        $('#slide').attr("src", path);
+        $('#status').fadeToggle(1000, "linear", function () {
+            $('#slide').fadeToggle(5000, "linear");
+        });
+    } else {
+        $('#slide').fadeToggle(5000, "linear", function () {
+            $('#status').fadeToggle(1000, "linear");
+        });
+    }
+
+    isBoardShowing = !isBoardShowing;
+}, 5 * 60 * 1000)
 
 var mapsAPI = config['google-maps-api'];
 var origin = config['map-origin'];
@@ -42,21 +66,6 @@ function updateNetworkActivity() {
     });
 }
 
-function nextSlide() {
-    imageId++;
-    var path = "img/slideshow/" + imageId + ".png";
-
-    if (!fs.existsSync(path)) {
-        //reset to the first id
-        imageId = 1;
-        path = "img/slideshow/" + imageId + ".png";
-    }
-
-    $('#slide').fadeToggle(1000, "linear", function () {
-        $('#slide').attr("src", path);
-        $('#slide').fadeToggle(1000, "linear");
-    });
-}
 
 function updateTime() {
     var now = new Date();
