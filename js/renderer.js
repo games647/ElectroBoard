@@ -22,6 +22,11 @@ require('./solar.js')
 var weather = require('./weather.js')
 weather.updateWeather(config['openweathermap-api'], config['weather-city']);
 
+var mapsAPI = config['google-maps-api'];
+var origin = config['map-origin'];
+var destination = config['map-destination'];
+$("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
+
 setInterval(updateTime, 1000)
 setInterval(updateNetworkActivity, 3 * 1000)
 
@@ -49,11 +54,6 @@ setInterval(function() {
     isBoardShowing = !isBoardShowing;
 }, 5 * 60 * 1000)
 
-var mapsAPI = config['google-maps-api'];
-var origin = config['map-origin'];
-var destination = config['map-destination'];
-// $("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
-
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
         var components = stdout.split(/[ ,]+/);
@@ -65,7 +65,6 @@ function updateNetworkActivity() {
         $("#download").text("Current: " + download + " kB/s");
     });
 }
-
 
 function updateTime() {
     var now = new Date();
