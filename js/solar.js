@@ -40,12 +40,21 @@ function updateSolarData() {
             if (transferType == 'g') {
                 //output
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
+
                 $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-output.png')");
                 $("#transfer .solar-icon div:first-child").css('height', "150px");
-            } else {
+            } else if (transferType == 'r') {
                 //input
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
+
                 $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-input.png')");
+                $("#transfer .solar-icon div:first-child").css('height', "150px");
+            } else {
+                //e for neutral
+
+                $("#transferType").prop('class', "glyphicon glyphicon-minus");
+
+                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-empty.png')");
                 $("#transfer .solar-icon div:first-child").css('height', "150px");
             }
 
