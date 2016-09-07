@@ -14,10 +14,14 @@
     "dashboard",
     "mirror",
     "raspberry",
+    "freifunk",
+    "solar",
+    "calendar",
+    "weather",
     "pi"
   ],
   "author": "games647 and contributors",
-  "license": "MIT",
+  "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/games647/ElectroBoard/issues"
   },

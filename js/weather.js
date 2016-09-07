@@ -5,16 +5,14 @@ var exports = module.exports = {};
 
 exports.updateWeather = function(apiKey, city) {
     request('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric', function (error, response, body) {
-        if (error) {
-            return console.log('Error:', error);
-        }
-
-        if (response.statusCode !== 200) {
-            return console.log('Invalid Status Code Returned:', response.statusCode);
-        }
-
         var data = JSON.parse(body);
         console.log(data)
+
+        if ('cod' in data && data.cod != 200) {
+            //error occurred
+            console.log(data.message);
+            return;
+        }
 
         var temperature = data.main.temp;
         $("#temperature").text(temperature + "°C");
