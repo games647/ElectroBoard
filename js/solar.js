@@ -35,7 +35,6 @@ function updateSolarData() {
             var sufficient = components[5];
             var consume = components[6];
 
-            //either r for input or g for output
             var transferType = components[7];
             if (transferType == 'g') {
                 //output
@@ -51,7 +50,6 @@ function updateSolarData() {
                 $("#transfer .solar-icon div:first-child").css('height', "150px");
             } else {
                 //e for neutral
-
                 $("#transferType").prop('class', "glyphicon glyphicon-minus");
 
                 $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-empty.png')");
@@ -68,8 +66,8 @@ function updateSolarData() {
 
 function updateSolarImage(id, pct) {
     var imageHeight = 150 - 150 / 100 * pct;
-    if (imageHeight == 0) {
-        imageHeight = 150;
+    if (pct == 100) {
+        imageHeight = 0;
     }
 
     $("#" + id + " .solar-icon div:first-child").css('height', imageHeight + "px");
