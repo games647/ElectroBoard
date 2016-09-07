@@ -34,8 +34,8 @@ function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
         var components = stdout.split(/[ ,]+/);
 
-        var upload = parseInt(components[0], 10) / 1000;
-        var download = parseInt(components[1], 10) / 1000;
+        var upload = Math.round(parseInt(components[0], 10) / 1024 * 100) / 100;
+        var download = Math.round(parseInt(components[1], 10) / 1024 * 100) / 100;
 
         $("#upload").text("Current: " + upload + " kB/S");
         $("#download").text("Current: " + download + " kB/s");

@@ -40,15 +40,13 @@ function updateSolarData() {
             if (transferType == 'g') {
                 //output
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
-
-                updateSolarImage("transfer", 0);
-                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-output.png')");
+                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-output.png')");
+                $("#transfer .solar-icon div:first-child").css('height', "150px");
             } else {
                 //input
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
-
-                updateSolarImage("transfer", 0);
-                $("#transfer .solar-icon div:nth-child(2)").css('background-image', "url('img/transfer-input.png')");
+                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-input.png')");
+                $("#transfer .solar-icon div:first-child").css('height', "150px");
             }
 
             $("#transferEnergy").text(components[8]);
