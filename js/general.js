@@ -9,7 +9,7 @@ var fs = require('fs');
 var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
 
-var imageId = 0;
+var imageId = 1;
 var isBoardShowing = true;
 
 ipcRenderer.on('config-loaded', function(event, config) {
@@ -25,26 +25,33 @@ setInterval(updateNetworkActivity, 3 * 1000);
 setInterval(function() {
     if (isBoardShowing) {
         imageId++;
-        var path = "img/slideshow/" + imageId + ".png";
+        var path = "img/slideshow/" + imageId + ".jpg";
 
         if (!fs.existsSync(path)) {
             //reset to the first id
             imageId = 1;
-            path = "img/slideshow/" + imageId + ".png";
+            path = "img/slideshow/" + imageId + ".jpg";
         }
 
-        $('#slide').attr("src", path);
         $('#status').fadeToggle(1000, "linear", function () {
-            $('#slide').fadeToggle(5000, "linear");
+            $("#background").animate({
+                opacity: 0
+            }, 3000, function () {
+                $("#background").css('background-image', 'url("./' + path +  ' ")');
+                $("#background").animate({
+                    opacity: 1
+                }, 3000);
+            });
         });
     } else {
-        $('#slide').fadeToggle(5000, "linear", function () {
-            $('#status').fadeToggle(1000, "linear");
-        });
+        $('#status').fadeToggle(1000, "linear");
+        $("#background").animate({
+            opacity: 0.8
+        }, 3000);
     }
 
     isBoardShowing = !isBoardShowing;
-}, 5 * 60 * 1000);
+}, 10 * 1000);
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
