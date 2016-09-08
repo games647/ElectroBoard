@@ -5,6 +5,7 @@
 //imports
 const {ipcRenderer} = require('electron')
 
+var fs = require('fs');
 var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
 

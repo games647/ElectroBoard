@@ -33,6 +33,7 @@
     "dateformat": "1.0.12",
     "jquery": "3.1.0",
     "bootstrap": "3.3.7",
-    "request": "2.74.0"
+    "request": "2.74.0",
+    "jquery-ui": "1.12.0"
   }
 }

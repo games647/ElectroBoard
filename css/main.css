@@ -7,7 +7,7 @@ body {
     /*background-position: center center;*/
 }
 
-html {
+html, body {
     width: 100%;
     height: 100%;
 }
@@ -15,7 +15,9 @@ html {
 #slide {
     height: 100%;
     width: auto;
+
     vertical-align: center;
+
     display: block;
     margin: auto;
 }

@@ -7,8 +7,6 @@
 
     <title>ElectroBoard</title>
 
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
-
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
@@ -108,7 +106,7 @@
                             <span>7:15</span>
                         </div>
                         <div class="col-xs-9 calendar-title">
-                            <span>Test-title is here</span>
+                            <span>Test</span>
                         </div>
                     </div>
                     </div>
@@ -119,18 +117,17 @@
 </div>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
 <script>
     //jQuery (necessary for Bootstrap's JavaScript plugins)
-    require('jquery')
+    var jQuery = require('jquery')
 
-    window.jQuery = window.$ = module.exports;
+    window.jQuery = window.$ = jQuery;
+    require('jquery-ui')
     require('bootstrap')
 
     // This lets javascript files be processed in the renderer thread
     // so here are all project components
-    require('./js/renderer.js')
+    require('./js/general.js')
     require('./js/solar.js')
     require('./js/weather.js')
     require('./js/freifunk.js')
