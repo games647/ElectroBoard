@@ -55,6 +55,7 @@ setInterval(function() {
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
+        console.log(stdout);
         var components = stdout.split(/[ ,]+/);
 
         var upload = Math.round(parseInt(components[0], 10) / 1024 * 100) / 100;

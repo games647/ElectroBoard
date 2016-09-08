@@ -57,23 +57,30 @@ function updateFreifunkInfo(nodes, server) {
                 var section = data[i];
                 var target = section.target;
 
-                var oldest = section.datapoints[section.datapoints.length - 1];
-                if (oldest[0] == null) {
+                //begin from the newst
+                var position = section.datapoints.length - 1;
+                var newest = section.datapoints[position];
+                while (newest != null && newest[0] == null) {
+                    newest = section.datapoints[--position];
+                    continue;
+                }
+
+                if (newest == null) {
                     continue;
                 }
 
                 if (target.endsWith('clients')) {
-                    clients += oldest[1];
+                    clients += newest[0];
                 } else if (target.endsWith('rx')) {
-                    rx += parseInt(oldest[0]);
+                    rx += parseInt(newest[0]);
                 } else if (target.endsWith('tx')) {
-                    tx += parseInt(oldest[0]);
+                    tx += parseInt(newest[0]);
                 }
             }
 
             tx = Math.round(tx / 1024 * 100) / 100;
             rx = Math.round(rx / 1024 * 100) / 100;
-            $("#freifunk-clients").text("Clients: " + clients + " kB/s");
+            $("#freifunk-clients").text("Clients: " + clients + "");
             $("#freifunk-up").text("Upstream: " + tx + " kB/s");
             $("#freifunk-down").text("Downstream: " + rx + " kB/s");
         });
