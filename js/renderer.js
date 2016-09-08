@@ -3,32 +3,20 @@
 // All of the Node.js APIs are available in this process.
 
 //imports
-var fs = require('fs');
+const {ipcRenderer} = require('electron')
+
 var dateFormat = require('dateformat');
 var exec = require('child_process').exec;
 
 var imageId = 0;
 var isBoardShowing = true;
 
-var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-
-//components
-var freifunk = require('./freifunk.js');
-setInterval(function () {
-    freifunk.updateClientInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
-}, 60 * 1000);
-
-require('./solar.js');
-var weather = require('./weather.js');
-
-setInterval(function () {
-    weather.updateWeather(config['openweathermap-api'], config['weather-city']);
-}, 30 * 60 * 1000)
-
-var mapsAPI = config['google-maps-api'];
-var origin = config['map-origin'];
-var destination = config['map-destination'];
-$("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
+ipcRenderer.on('config-loaded', function(event, config) {
+    var mapsAPI = config['google-maps-api'];
+    var origin = config['map-origin'];
+    var destination = config['map-destination'];
+    setMapsImage(mapsAPI, origin, destination);
+})
 
 setInterval(updateTime, 1000);
 setInterval(updateNetworkActivity, 3 * 1000);
@@ -76,4 +64,10 @@ function updateTime() {
 
     $("#date").text(header);
     $("#time").text(time);
+}
+
+function setMapsImage(mapsApiKey, origin, destination) {
+    var url = "https://www.google.com/maps/embed/v1/directions?" +
+        "key=" + mapsApiKey + "&origin=" + origin + "&destination=" + destination;
+    $("#map iframe").prop('src', url);
 }

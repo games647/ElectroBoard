@@ -70,3 +70,13 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+app.on('ready', function() {
+  mainWindow.webContents.on('did-finish-load', function () {
+    var fs = require('fs');
+
+    fs.readFile('config.json', 'utf8', function (err, data) {
+      var config = JSON.parse(data);
+      mainWindow.webContents.send('config-loaded', config);
+    });
+  });
+})

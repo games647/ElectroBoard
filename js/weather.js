@@ -1,9 +1,16 @@
 //imports
+const {ipcRenderer} = require('electron')
+
 var request = require('request');
 
-var exports = module.exports = {};
+ipcRenderer.on('config-loaded', function(event, config) {
+    updateWeather(config['openweathermap-api'], config['weather-city']);
+    setInterval(function () {
+        updateWeather(config['openweathermap-api'], config['weather-city']);
+    }, 30 * 60 * 1000)
+})
 
-exports.updateWeather = function(apiKey, city) {
+function updateWeather(apiKey, city) {
     request('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric', function (error, response, body) {
         var data = JSON.parse(body);
         console.log(data);

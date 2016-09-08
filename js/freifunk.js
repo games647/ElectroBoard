@@ -1,16 +1,23 @@
 //imports
+const {ipcRenderer} = require('electron')
+
 var https = require('https');
 var querystring = require('querystring');
 var util = require('util');
-
-var exports = module.exports = {};
 
 //consts
 const CLIENT_FORMAT = "freifunk.%s.clients";
 const RX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.rx.bytes, 8)), 1, 3)";
 const TX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.tx.bytes, 8)), 1, 3)";
 
-exports.updateClientInfo = function(nodes, server) {
+ipcRenderer.on('config-loaded', function(event, config) {
+    updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
+    setInterval(function () {
+        updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
+    }, 60 * 1000);
+})
+
+function updateFreifunkInfo(nodes, server) {
     var targets = [];
     for (i = 0; i < nodes.length; ++i) {
         var node = nodes[i];

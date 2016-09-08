@@ -1,7 +1,10 @@
 //imports
+const {ipcRenderer} = require('electron')
+
 var http = require('http');
 var querystring = require('querystring');
 
+updateSolarData();
 setInterval(updateSolarData, 5 * 1000);
 
 function updateSolarData() {
