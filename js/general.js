@@ -27,6 +27,7 @@ setInterval(() => {
             //reset to the first id
             imageId = 1;
             path = "img/slideshow/" + imageId + ".jpg";
+            console.log("RESET TO THE FIRST BACKGROUND ID");
         }
 
         var bitmap = fs.readFileSync(path);
@@ -35,11 +36,11 @@ setInterval(() => {
         $('#status').fadeToggle(1000, "linear", () => {
             $("#background").animate({
                 opacity: 0.0
-            }, 3000, () => {
+            }, 6000, () => {
                 $("#background").css('background-image', 'url(data:image/jpg;base64, ' + base64 + ')');
                 $("#background").animate({
                     opacity: 1
-                }, 3000);
+                }, 6000);
             });
         });
     } else {
@@ -50,7 +51,7 @@ setInterval(() => {
     }
 
     isBoardShowing = !isBoardShowing;
-}, 10 * 1000);
+}, 20 * 1000);
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', (error, stdout, stderr) => {

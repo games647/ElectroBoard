@@ -10,8 +10,6 @@
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -19,22 +17,22 @@
 <body>
 <div id="status" class="container">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-sm-6">
             <div class="row">
-                <div id="map" class="col-xs-8 two-row">
+                <div id="map" class="col-sm-8 two-row">
                     <iframe>
 
                     </iframe>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4">
                     <div class="row">
-                        <div id="weather" class="col-xs-12 box one-row">
+                        <div id="weather" class="col-sm-12 box one-row">
                             <img src="img/sun-cloud.png">
                             <span id="temperature">0 °C</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div id="freifunk" class="col-xs-12 box one-row">
+                        <div id="freifunk" class="col-sm-12 box one-row">
                             <img src="img/freifunk.svg">
                             <span id="freifunk-clients">Clients: 0</span>
                             <span id="freifunk-down">Downstream: 0 kB/s</span>
@@ -44,8 +42,8 @@
                 </div>
             </div>
             <div class="row">
-                <div id="solar" class="col-xs-12 box one-row">
-                    <div id="panel" class="col-xs-4">
+                <div id="solar" class="col-sm-12 box one-row">
+                    <div id="panel" class="col-sm-4">
                         <div class="solar-icon">
                             <div style="background-image: url('img/panel-empty.png');"></div>
                             <div style="background-image: url('img/panel-full.png');"></div>
@@ -53,14 +51,14 @@
                         <span id="powerPct">0%</span>
                         <span id="powerEnergy">0kW</span>
                     </div>
-                    <div id="battery" class="col-xs-4">
+                    <div id="battery" class="col-sm-4">
                         <div class="solar-icon">
                             <div style="background-image: url('img/battery-empty.png');"></div>
                             <div style="background-image: url('img/battery-full.png');"></div>
                         </div>
                         <span id="batteryPct">0%</span>
                     </div>
-                    <div id="transfer" class="col-xs-4">
+                    <div id="transfer" class="col-sm-4">
                         <div class="solar-icon">
                             <div></div>
                         </div>
@@ -72,40 +70,39 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-sm-6">
             <div class="row">
-                <div id="timestamp" class="col-xs-12 box one-row">
+                <div id="timestamp" class="col-sm-12 box one-row">
                     <span id="date">DATE</span>
                     <span id="time">TIME</span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-sm-6">
                     <div class="row">
-                        <div class="col-xs-12 box one-row network">
+                        <div class="col-sm-12 box one-row network">
                             <img src="img/download.png">
                             <span id="download">Current: 0 kB/s</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 box one-row network">
+                        <div class="col-sm-12 box one-row network">
                             <img src="img/upload.png">
                             <span id="upload">Current: 0 kB/s</span>
                         </div>
                     </div>
                 </div>
-                <div id="calendar" class="col-xs-6 box two-row">
-                    <div id="title" class="col-xs-12">
+                <div id="calendar" class="col-sm-6 box two-row">
+                    <div id="title" class="col-sm-12">
                         <span>Calendar</span>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3 calendar-time">
-                            <span>7:15</span>
+                        <div class="col-sm-3 calendar-time">
+                            <span>10/12 7:15</span>
                         </div>
-                        <div class="col-xs-9 calendar-title">
+                        <div class="col-sm-9 calendar-title">
                             <span>Test</span>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -130,5 +127,6 @@
     require('./js/solar.js')
     require('./js/weather.js')
     require('./js/freifunk.js')
+    require('./js/calendar.js')
 </script>
 </html>
