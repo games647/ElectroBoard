@@ -15,9 +15,9 @@ exports.updateClientInfo = function(nodes, server) {
     for (i = 0; i < nodes.length; ++i) {
         var node = nodes[i];
 
-        targets.push(util.format(CLIENT_FORMAT, node))
-        targets.push(util.format(RX_FORMAT, node))
-        targets.push(util.format(TX_FORMAT, node))
+        targets.push(util.format(CLIENT_FORMAT, node));
+        targets.push(util.format(RX_FORMAT, node));
+        targets.push(util.format(TX_FORMAT, node));
     }
 
     var data = querystring.stringify({
@@ -41,7 +41,7 @@ exports.updateClientInfo = function(nodes, server) {
     var req = https.request(options, function (res) {
         res.on('data', function (chunk) {
             var data = JSON.parse(chunk);
-            console.log(data)
+            console.log(data);
 
             var clients = 0;
             var rx = 0;
@@ -50,7 +50,7 @@ exports.updateClientInfo = function(nodes, server) {
                 var section = data[i];
                 var target = section.target;
 
-                var oldest = section.datapoints[section.datapoints.length - 1]
+                var oldest = section.datapoints[section.datapoints.length - 1];
                 if (oldest[0] == null) {
                     continue;
                 }
@@ -64,8 +64,8 @@ exports.updateClientInfo = function(nodes, server) {
                 }
             }
 
-            tx = Math.round(tx / 1024 * 100) / 100
-            rx = Math.round(rx / 1024 * 100) / 100
+            tx = Math.round(tx / 1024 * 100) / 100;
+            rx = Math.round(rx / 1024 * 100) / 100;
             $("#freifunk-clients").text("Clients: " + clients + " kB/s");
             $("#freifunk-up").text("Upstream: " + tx + " kB/s");
             $("#freifunk-down").text("Downstream: " + rx + " kB/s");
@@ -74,4 +74,4 @@ exports.updateClientInfo = function(nodes, server) {
 
     req.write(data);
     req.end();
-}
+};

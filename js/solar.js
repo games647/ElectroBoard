@@ -2,7 +2,7 @@
 var http = require('http');
 var querystring = require('querystring');
 
-setInterval(updateSolarData, 5 * 1000)
+setInterval(updateSolarData, 5 * 1000);
 
 function updateSolarData() {
     var data = querystring.stringify({
@@ -32,8 +32,8 @@ function updateSolarData() {
             $("#batteryPct").text(batteryPct + ' %');
             updateSolarImage("battery", batteryPct);
 
-            var sufficient = components[5];
-            var consume = components[6];
+            // var sufficient = components[5];
+            // var consume = components[6];
 
             var transferType = components[7];
             if (transferType == 'g') {

@@ -16,19 +16,22 @@ var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 var freifunk = require('./freifunk.js');
 setInterval(function () {
     freifunk.updateClientInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
-}, 1 * 60 * 1000);
+}, 60 * 1000);
 
-require('./solar.js')
-var weather = require('./weather.js')
-weather.updateWeather(config['openweathermap-api'], config['weather-city']);
+require('./solar.js');
+var weather = require('./weather.js');
+
+setInterval(function () {
+    weather.updateWeather(config['openweathermap-api'], config['weather-city']);
+}, 30 * 60 * 1000)
 
 var mapsAPI = config['google-maps-api'];
 var origin = config['map-origin'];
 var destination = config['map-destination'];
 $("#map iframe").prop('src', "https://www.google.com/maps/embed/v1/directions?key=" + mapsAPI + "&origin=" + origin + "&destination=" + destination);
 
-setInterval(updateTime, 1000)
-setInterval(updateNetworkActivity, 3 * 1000)
+setInterval(updateTime, 1000);
+setInterval(updateNetworkActivity, 3 * 1000);
 
 setInterval(function() {
     if (isBoardShowing) {
@@ -52,7 +55,7 @@ setInterval(function() {
     }
 
     isBoardShowing = !isBoardShowing;
-}, 5 * 60 * 1000)
+}, 5 * 60 * 1000);
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
@@ -69,7 +72,7 @@ function updateNetworkActivity() {
 function updateTime() {
     var now = new Date();
     var header = dateFormat(now, "dddd, mmmm dS, yyyy");
-    var time = dateFormat(now, "H:MM:ss")
+    var time = dateFormat(now, "H:MM:ss");
 
     $("#date").text(header);
     $("#time").text(time);

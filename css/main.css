@@ -1,8 +1,13 @@
 body {
     background-color: black;
+
+    /*background-image: url("../img/test.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center center;*/
 }
 
-html, body {
+html {
     width: 100%;
     height: 100%;
 }
@@ -17,7 +22,7 @@ html, body {
 
 .box {
     color: white;
-    background-color: rgb(34, 34, 34);
+    background-color: rgba(34, 34, 34, 0.8);
     padding: 10px;
     text-align: center;
 
@@ -38,15 +43,14 @@ div span {
 }
 
 #map {
-    padding-left: 2px;
-    padding-right: 2px;
+    padding: 2px;
 }
 
 #map iframe {
     width: 100%;
     height: 100%;
 
-    border-width: 0px;
+    border-width: 0;
 }
 
 #freifunk img {
@@ -95,7 +99,7 @@ div span {
 }
 
 #calendar #title {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 10px;
 
     background-color: red;
