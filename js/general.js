@@ -12,17 +12,17 @@ var exec = require('child_process').exec;
 var imageId = 1;
 var isBoardShowing = true;
 
-ipcRenderer.on('config-loaded', function(event, config) {
+ipcRenderer.on('config-loaded', (event, config) => {
     var mapsAPI = config['google-maps-api'];
     var origin = config['map-origin'];
     var destination = config['map-destination'];
     setMapsImage(mapsAPI, origin, destination);
-})
+});
 
 setInterval(updateTime, 1000);
 setInterval(updateNetworkActivity, 3 * 1000);
 
-setInterval(function() {
+setInterval(() => {
     if (isBoardShowing) {
         imageId++;
         var path = "img/slideshow/" + imageId + ".jpg";
@@ -33,10 +33,10 @@ setInterval(function() {
             path = "img/slideshow/" + imageId + ".jpg";
         }
 
-        $('#status').fadeToggle(1000, "linear", function () {
+        $('#status').fadeToggle(1000, "linear", () => {
             $("#background").animate({
                 opacity: 0
-            }, 3000, function () {
+            }, 3000, () => {
                 $("#background").css('background-image', 'url("./' + path +  ' ")');
                 $("#background").animate({
                     opacity: 1
@@ -54,7 +54,7 @@ setInterval(function() {
 }, 10 * 1000);
 
 function updateNetworkActivity() {
-    exec('"scripts/network-activity.py"', function (error, stdout, stderr) {
+    exec('"scripts/network-activity.py"', (error, stdout, stderr) => {
         console.log(stdout);
         var components = stdout.split(/[ ,]+/);
 

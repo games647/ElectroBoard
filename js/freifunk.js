@@ -10,12 +10,12 @@ const CLIENT_FORMAT = "freifunk.%s.clients";
 const RX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.rx.bytes, 8)), 1, 3)";
 const TX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.tx.bytes, 8)), 1, 3)";
 
-ipcRenderer.on('config-loaded', function(event, config) {
+ipcRenderer.on('config-loaded', (event, config) => {
     updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
-    setInterval(function () {
+    setInterval(() => {
         updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
     }, 60 * 1000);
-})
+});
 
 function updateFreifunkInfo(nodes, server) {
     var targets = [];
@@ -45,8 +45,8 @@ function updateFreifunkInfo(nodes, server) {
         }
     };
 
-    var req = https.request(options, function (res) {
-        res.on('data', function (chunk) {
+    var req = https.request(options, res => {
+        res.on('data', chunk => {
             var data = JSON.parse(chunk);
             console.log(data);
 

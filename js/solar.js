@@ -22,8 +22,8 @@ function updateSolarData() {
         }
     };
 
-    var req = http.request(options, function (res) {
-        res.on('data', function (chunk) {
+    var req = http.request(options, res => {
+        res.on('data', chunk => {
             var components = chunk.toString().split(/[|]+/);
 
             var powerPct = parseFloat(components[1]);
