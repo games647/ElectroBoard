@@ -1,7 +1,3 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
 //imports
 const {ipcRenderer} = require('electron')
 
@@ -33,11 +29,14 @@ setInterval(() => {
             path = "img/slideshow/" + imageId + ".jpg";
         }
 
+        var bitmap = fs.readFileSync(path);
+        var base64 = new Buffer(bitmap).toString('base64');
+
         $('#status').fadeToggle(1000, "linear", () => {
             $("#background").animate({
-                opacity: 0
+                opacity: 0.0
             }, 3000, () => {
-                $("#background").css('background-image', 'url("./' + path +  ' ")');
+                $("#background").css('background-image', 'url(data:image/jpg;base64, ' + base64 + ')');
                 $("#background").animate({
                     opacity: 1
                 }, 3000);
@@ -68,7 +67,7 @@ function updateNetworkActivity() {
 
 function updateTime() {
     var now = new Date();
-    var header = dateFormat(now, "dddd, mmmm dS, yyyy");
+    var header = dateFormat(now, "dddd, mmmm dS");
     var time = dateFormat(now, "H:MM:ss");
 
     $("#date").text(header);

@@ -81,8 +81,8 @@ function updateFreifunkInfo(nodes, server) {
             tx = Math.round(tx / 1024 * 100) / 100;
             rx = Math.round(rx / 1024 * 100) / 100;
             $("#freifunk-clients").text("Clients: " + clients + "");
-            $("#freifunk-up").text("Upstream: " + tx + " kB/s");
-            $("#freifunk-down").text("Downstream: " + rx + " kB/s");
+            $("#freifunk-up").text("Up: " + tx + " kB/s");
+            $("#freifunk-down").text("Down: " + rx + " kB/s");
         });
     });
 
