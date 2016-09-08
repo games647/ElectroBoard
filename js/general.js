@@ -36,11 +36,11 @@ setInterval(() => {
         $('#status').fadeToggle(1000, "linear", () => {
             $("#background").animate({
                 opacity: 0.0
-            }, 6000, () => {
-                $("#background").css('background-image', 'url(data:image/jpg;base64, ' + base64 + ')');
+            }, 3000, () => {
+                $("#background").css('background-image', 'url(data:image/jpg;base64,' + base64 + ')');
                 $("#background").animate({
                     opacity: 1
-                }, 6000);
+                }, 3000);
             });
         });
     } else {
@@ -51,7 +51,7 @@ setInterval(() => {
     }
 
     isBoardShowing = !isBoardShowing;
-}, 20 * 1000);
+}, 10 * 1000);
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', (error, stdout, stderr) => {

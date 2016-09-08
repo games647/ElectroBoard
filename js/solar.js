@@ -15,7 +15,7 @@ function updateSolarData() {
     var options = {
         host: '192.168.0.75',
         port: 80,
-        path: '/cgi-bin/ipcclient.fcgi?HjB7JutSh1n93DU',
+        path: '/cgi-bin/ipcclient.fcgi?tSh8rE9fgIihtVY',
         method: 'POST',
         headers: {
             'Content-Length': Buffer.byteLength(data)
