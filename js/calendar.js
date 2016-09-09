@@ -29,8 +29,9 @@ function updateCalendar() {
             var data = JSON.parse(chunk);
             console.log(data);
 
-            $(".calendar .row:nth-child(1) .calendar-time").text("");
-            $(".calendar .row:nth-child(1) .calendar-title").text("");
+            var row = 1;
+            $(".calendar .row:nth-child(" + row + ") .calendar-time").text("");
+            $(".calendar .row:nth-child(" + row + ") .calendar-title").text("");
         });
     });
 }

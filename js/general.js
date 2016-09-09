@@ -30,14 +30,11 @@ setInterval(() => {
             console.log("RESET TO THE FIRST BACKGROUND ID");
         }
 
-        var bitmap = fs.readFileSync(path);
-        var base64 = new Buffer(bitmap).toString('base64');
-
         $('#status').fadeToggle(1000, "linear", () => {
             $("#background").animate({
                 opacity: 0.0
             }, 3000, () => {
-                $("#background").css('background-image', 'url(data:image/jpg;base64,' + base64 + ')');
+                $("#background").css('background-image', 'url(' + path + ')');
                 $("#background").animate({
                     opacity: 1
                 }, 3000);
