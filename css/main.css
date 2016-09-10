@@ -104,14 +104,18 @@ div span {
     padding-right: 5px;
 }
 
-#calendar div span {
+#calendar-content .row {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#calendar span {
     font-size: 20px;
     line-height: 1.5em;
 
     text-align: center;
 }
 
-#calendar #title {
+#calendar-title div {
     margin-top: 0;
     margin-bottom: 10px;
 

@@ -53,7 +53,7 @@ function updateFreifunkInfo(nodes, server) {
             var clients = 0;
             var rx = 0;
             var tx = 0;
-            for (i = 0; i < data.length; ++i) {
+            for (var i = 0; i < data.length; ++i) {
                 var section = data[i];
                 var target = section.target;
 

@@ -2,7 +2,6 @@
 const {ipcRenderer} = require('electron')
 
 var http = require('http');
-var jQuery = require('jquery');
 
 ipcRenderer.on('config-loaded', (event, config) => {
     updateWeather(config['openweathermap-api'], config['weather-city']);
