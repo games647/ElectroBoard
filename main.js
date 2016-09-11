@@ -1,9 +1,9 @@
 const electron = require('electron')
 
 // Module to control application life.
-const {app, globalShortcut} = require('electron')
+const {app, globalShortcut} = require('electron');
 // Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
+const BrowserWindow = electron.BrowserWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,18 +11,18 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 600})
+  mainWindow = new BrowserWindow({width: 1200, height: 600});
 
   // and load the i.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   //hide the menu items for fullscreen usage
-  mainWindow.setMenu(null)
+  mainWindow.setMenu(null);
 
-  mainWindow.maximize()
+  mainWindow.maximize();
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -48,7 +48,7 @@ app.on('ready', () => {
   app.on('browser-window-blur', () => {
     globalShortcut.unregister('F11');
   });
-})
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -57,7 +57,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
+});
 
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
@@ -65,7 +65,7 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
-})
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
@@ -74,6 +74,10 @@ app.on('ready', () => {
     var fs = require('fs');
 
     fs.readFile('config.json', 'utf8', (err, data) => {
+      if (err) {
+        return console.log(err);
+      }
+
       var config = JSON.parse(data);
       mainWindow.webContents.send('config-loaded', config);
     });

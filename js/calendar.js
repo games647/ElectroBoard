@@ -45,6 +45,10 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
             var data = JSON.parse(chunk);
             console.log(data);
 
+            if (data.error) {
+                return console.log(data.error);
+            }
+
             var events = data.data;
 
             //hide all entries to remove outdated ones
