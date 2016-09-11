@@ -43,10 +43,15 @@ app.on('ready', () => {
     globalShortcut.register('F11', () => {
       mainWindow.setFullScreen(!mainWindow.isFullScreen())
     });
+
+    globalShortcut.register('F12', () => {
+      mainWindow.webContents.toggleDevTools();
+    });
   });
 
   app.on('browser-window-blur', () => {
     globalShortcut.unregister('F11');
+    globalShortcut.unregister('F12');
   });
 });
 
