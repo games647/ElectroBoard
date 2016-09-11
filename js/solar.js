@@ -4,10 +4,16 @@ const {ipcRenderer} = require('electron')
 var http = require('http');
 var querystring = require('querystring');
 
-updateSolarData();
-setInterval(updateSolarData, 5 * 1000);
+ipcRenderer.on('config-loaded', (event, config) => {
+    var solarPanelSession = config['solar-panel-session'];
 
-function updateSolarData() {
+    updateSolarData(solarPanelSession);
+    setInterval(function () {
+        updateSolarData(solarPanelSession);
+    }, 5 * 1000);
+});
+
+function updateSolarData(session) {
     var data = querystring.stringify({
         'action': 'get.hyb.overview'
     });
@@ -15,7 +21,7 @@ function updateSolarData() {
     var options = {
         host: '192.168.0.75',
         port: 80,
-        path: '/cgi-bin/ipcclient.fcgi?Jt3B3VQu6LjVKrF',
+        path: '/cgi-bin/ipcclient.fcgi?0' + session,
         method: 'POST',
         headers: {
             'Content-Length': Buffer.byteLength(data)
@@ -60,6 +66,8 @@ function updateSolarData() {
             }
 
             $("#transferEnergy").text(components[8]);
+        }).on('error', e => {
+            console.log(`Got error: ${e.message}`);
         });
     });
 

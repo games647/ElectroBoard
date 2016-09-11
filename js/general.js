@@ -12,6 +12,7 @@ ipcRenderer.on('config-loaded', (event, config) => {
     var mapsAPI = config['google-maps-api'];
     var origin = config['map-origin'];
     var destination = config['map-destination'];
+
     setMapsImage(mapsAPI, origin, destination);
 });
 

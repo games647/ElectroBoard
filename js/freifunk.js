@@ -11,9 +11,12 @@ const RX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.rx.bytes, 8))
 const TX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.tx.bytes, 8)), 1, 3)";
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
+    var freifunkNodes = config['freifunk-nodes'];
+    var statsServer = config['freifunk-stats-server'];
+
+    updateFreifunkInfo(freifunkNodes, statsServer)
     setInterval(() => {
-        updateFreifunkInfo(config['freifunk-nodes'], config['freifunk-stats-server'])
+        updateFreifunkInfo(freifunkNodes, statsServer)
     }, 60 * 1000);
 });
 

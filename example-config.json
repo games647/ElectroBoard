@@ -10,5 +10,6 @@
   "freifunk-stats-server": "",
   "xchange-secret": "",
   "xchange-secret-prefix": "",
-  "calendar-session": ""
+  "calendar-session": "",
+  "solar-panel-session": ""
 }

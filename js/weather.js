@@ -4,9 +4,12 @@ const {ipcRenderer} = require('electron')
 var http = require('http');
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    updateWeather(config['openweathermap-api'], config['weather-city']);
+    var apiKey = config['openweathermap-api'];
+    var city = config['weather-city'];
+
+    updateWeather(apiKey, city);
     setInterval(() => {
-        updateWeather(config['openweathermap-api'], config['weather-city']);
+        updateWeather(apiKey, city);
     }, 30 * 60 * 1000)
 });
 
