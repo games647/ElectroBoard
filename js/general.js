@@ -16,7 +16,7 @@ ipcRenderer.on('config-loaded', (event, config) => {
     setMapsImage(mapsAPI, origin, destination);
 
     var switchInterval = config['background-switch-seconds'];
-    setInterval(switchInterval, switchInterval * 1000);
+    setInterval(switchBackground, switchInterval * 1000);
 });
 
 setInterval(updateTime, 1000);
@@ -27,8 +27,10 @@ function switchBackground() {
         imageId++;
         var path = "img/slideshow/" + imageId + ".jpg";
 
-        if (!fs.existsSync(path)) {
-            //reset to the first id
+        try {
+            fs.statSync(path);
+        } catch (ex) {
+            //reset to the first id - file doesn't exist
             imageId = 1;
             path = "img/slideshow/" + imageId + ".jpg";
             console.log("reset to the first slideshow id");
@@ -61,8 +63,15 @@ function updateNetworkActivity() {
             return;
         }
 
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+        }
+
+        if (!stdout) {
+            return;
+        }
+
         console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
 
         var components = stdout.split(/[ ,]+/);
 
