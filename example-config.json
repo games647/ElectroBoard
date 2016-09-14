@@ -1,4 +1,5 @@
 {
+  "background-switch-seconds": 300,
   "google-maps-api": "",
   "openweathermap-api": "",
   "weather-city": "london",
