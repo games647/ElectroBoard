@@ -67,6 +67,8 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
                 $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-time span").text(time);
                 $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-title span").text(name);
             }
-        });
+        }).on('error', e => {
+            console.log(`Got error: ${e.message}`);
+        });;
     });
 }

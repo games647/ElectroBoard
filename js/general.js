@@ -14,12 +14,15 @@ ipcRenderer.on('config-loaded', (event, config) => {
     var destination = config['map-destination'];
 
     setMapsImage(mapsAPI, origin, destination);
+
+    var switchInterval = config['background-switch-seconds'];
+    setInterval(switchInterval, switchInterval * 1000);
 });
 
 setInterval(updateTime, 1000);
 setInterval(updateNetworkActivity, 3 * 1000);
 
-setInterval(() => {
+function switchBackground() {
     if (isBoardShowing) {
         imageId++;
         var path = "img/slideshow/" + imageId + ".jpg";
@@ -28,7 +31,7 @@ setInterval(() => {
             //reset to the first id
             imageId = 1;
             path = "img/slideshow/" + imageId + ".jpg";
-            console.log("RESET TO THE FIRST BACKGROUND ID");
+            console.log("reset to the first slideshow id");
         }
 
         $('#status').fadeToggle(1000, "linear", () => {
@@ -49,11 +52,18 @@ setInterval(() => {
     }
 
     isBoardShowing = !isBoardShowing;
-}, 10 * 1000);
+}
 
 function updateNetworkActivity() {
     exec('"scripts/network-activity.py"', (error, stdout, stderr) => {
-        console.log(stdout);
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+
         var components = stdout.split(/[ ,]+/);
 
         var upload = Math.round(parseInt(components[0], 10) / 1024 * 100) / 100;

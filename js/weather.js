@@ -22,6 +22,8 @@ function updateWeather(apiKey, city) {
 
             var temperature = data.main.temp;
             $("#temperature").text(temperature + "°C");
-        });
+        }).on('error', e => {
+            console.log(`Got error: ${e.message}`);
+        });;
     });
 };

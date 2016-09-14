@@ -86,7 +86,9 @@ function updateFreifunkInfo(nodes, server) {
             $("#freifunk-clients").text("Clients: " + clients + "");
             $("#freifunk-up").text("Up: " + tx + " kB/s");
             $("#freifunk-down").text("Down: " + rx + " kB/s");
-        });
+        }).on('error', e => {
+            console.log(`Got error: ${e.message}`);
+        });;
     });
 
     req.write(data);
