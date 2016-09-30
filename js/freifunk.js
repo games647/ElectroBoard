@@ -11,8 +11,8 @@ const RX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.rx.bytes, 8))
 const TX_FORMAT = "aliasByNode(perSecond(scale(freifunk.%s.traffic.tx.bytes, 8)), 1, 3)";
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    var freifunkNodes = config['freifunk-nodes'];
-    var statsServer = config['freifunk-stats-server'];
+    let freifunkNodes = config['freifunk-nodes'];
+    let statsServer = config['freifunk-stats-server'];
 
     updateFreifunkInfo(freifunkNodes, statsServer)
     setInterval(() => {
@@ -21,9 +21,9 @@ ipcRenderer.on('config-loaded', (event, config) => {
 });
 
 function updateFreifunkInfo(nodes, server) {
-    var targets = [];
-    for (i = 0; i < nodes.length; ++i) {
-        var node = nodes[i];
+    let targets = [];
+    for (let i = 0; i < nodes.length; ++i) {
+        let node = nodes[i];
 
         targets.push(util.format(CLIENT_FORMAT, node));
         targets.push(util.format(RX_FORMAT, node));
@@ -50,19 +50,19 @@ function updateFreifunkInfo(nodes, server) {
 
     var req = https.request(options, res => {
         res.on('data', chunk => {
-            var data = JSON.parse(chunk);
+            let data = JSON.parse(chunk);
             console.log(data);
 
-            var clients = 0;
-            var rx = 0;
-            var tx = 0;
-            for (var i = 0; i < data.length; ++i) {
-                var section = data[i];
-                var target = section.target;
+            let clients = 0;
+            let rx = 0;
+            let tx = 0;
+            for (let i = 0; i < data.length; ++i) {
+                let section = data[i];
+                let target = section.target;
 
                 //begin from the newst
-                var position = section.datapoints.length - 1;
-                var newest = section.datapoints[position];
+                let position = section.datapoints.length - 1;
+                let newest = section.datapoints[position];
                 while (newest != null && newest[0] == null) {
                     newest = section.datapoints[--position];
                     continue;

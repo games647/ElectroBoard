@@ -9,12 +9,12 @@ var dateFormat = require('dateformat');
 const MAX_ENTRIES = 5;
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    var xchangePrefix = config['xchange-secret-prefix'];
-    var xchangeSecret = config['xchange-secret'];
-    var calendarSession = config['calendar-session'];
+    let xchangePrefix = config['xchange-secret-prefix'];
+    let xchangeSecret = config['xchange-secret'];
+    let calendarSession = config['calendar-session'];
 
     updateCalendar(xchangePrefix, xchangeSecret, calendarSession)
-    setInterval(function () {
+    setInterval(() => {
         updateCalendar(xchangePrefix, xchangeSecret, calendarSession);
     }, 60 * 60 * 1000);
 });
@@ -42,25 +42,25 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
 
     https.get(options, res => {
         res.on('data', chunk => {
-            var data = JSON.parse(chunk);
+            let data = JSON.parse(chunk);
             console.log(data);
 
             if (data.error) {
                 return console.log(data.error);
             }
 
-            var events = data.data;
+            let events = data.data;
 
             //hide all entries to remove outdated ones
-            for (var row = 0; row < MAX_ENTRIES; ++row) {
+            for (let row = 0; row < MAX_ENTRIES; ++row) {
                 $("#calendar-content .row:nth-child(" + (row + 1) + ")").hide();
             }
 
-            for (var row = 0; row < events.length || row == MAX_ENTRIES; ++row) {
-                var event = events[row];
-                var name = event[0];
-                var eventStart = event[1];
-                var end = event[2];
+            for (let row = 0; row < events.length || row == MAX_ENTRIES; ++row) {
+                let event = events[row];
+                let name = event[0];
+                let eventStart = event[1];
+                let end = event[2];
 
                 var time = dateFormat(eventStart, 'd / m HH:MM');
                 $("#calendar-content .row:nth-child(" + (row + 1) + ")").show();

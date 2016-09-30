@@ -76,14 +76,14 @@ app.on('activate', () => {
 // code. You can also put them in separate files and require them here.
 app.on('ready', () => {
   mainWindow.webContents.on('did-finish-load', () => {
-    var fs = require('fs');
+    let fs = require('fs');
 
     fs.readFile('config.json', 'utf8', (err, data) => {
       if (err) {
         return console.log(err);
       }
 
-      var config = JSON.parse(data);
+      let config = JSON.parse(data);
       mainWindow.webContents.send('config-loaded', config);
     });
   });

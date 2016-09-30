@@ -5,20 +5,20 @@ var http = require('http');
 var querystring = require('querystring');
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    var solarPanelSession = config['solar-panel-session'];
+    let solarPanelSession = config['solar-panel-session'];
 
     updateSolarData(solarPanelSession);
-    setInterval(function () {
+    setInterval(() => {
         updateSolarData(solarPanelSession);
     }, 5 * 1000);
 });
 
 function updateSolarData(session) {
-    var data = querystring.stringify({
+    let data = querystring.stringify({
         'action': 'get.hyb.overview'
     });
 
-    var options = {
+    let options = {
         host: '192.168.0.75',
         port: 80,
         path: '/cgi-bin/ipcclient.fcgi?0' + session,
@@ -28,23 +28,23 @@ function updateSolarData(session) {
         }
     };
 
-    var req = http.request(options, res => {
+    let req = http.request(options, res => {
         res.on('data', chunk => {
-            var components = chunk.toString().split(/[|]+/);
+            let components = chunk.toString().split(/[|]+/);
 
-            var powerPct = parseFloat(components[1]);
+            let powerPct = parseFloat(components[1]);
             $("#powerPct").text(powerPct + ' %');
             $("#powerEnergy").text(components[2]);
             updateSolarImage("panel", powerPct);
 
-            var batteryPct = parseFloat(components[3]);
+            let batteryPct = parseFloat(components[3]);
             $("#batteryPct").text(batteryPct + ' %');
             updateSolarImage("battery", batteryPct);
 
             // var sufficient = components[5];
             // var consume = components[6];
 
-            var transferType = components[7];
+            let transferType = components[7];
             if (transferType == 'g') {
                 //output
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
@@ -76,7 +76,7 @@ function updateSolarData(session) {
 }
 
 function updateSolarImage(id, pct) {
-    var imageHeight = 150 - 150 / 100 * pct;
+    let imageHeight = 150 - 150 / 100 * pct;
     if (pct == 100) {
         imageHeight = 0;
     }
