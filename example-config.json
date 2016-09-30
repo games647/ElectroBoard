@@ -12,5 +12,6 @@
   "xchange-secret": "",
   "xchange-secret-prefix": "",
   "calendar-session": "",
-  "solar-panel-session": ""
+  "solar-panel-ip": "192.168.0.X",
+  "solar-panel-password": ""
 }

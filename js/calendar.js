@@ -32,9 +32,7 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
 
     var options = {
         host: 'mailxchange.de',
-        port: 443,
         path: '/appsuite/api/calendar?' + data,
-        method: 'GET',
         headers: {
             'Cookie': "open-xchange-secret-" + xchangePrefix + "=" + xchangeSecret
         }
@@ -68,9 +66,7 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
                 $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-title span").text(name);
             }
         });
-    });
-
-    req.on('error', (e) => {
-        console.log(`problem with request: ${e.message}`);
+    }).on('error', event => {
+        console.log(`problem with request: ${event.message}`);
     });
 }

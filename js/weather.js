@@ -15,17 +15,18 @@ ipcRenderer.on('config-loaded', (event, config) => {
 
 function updateWeather(apiKey, city) {
     let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric';
-    let req = http.get(url, res => {
+    http.get(url, res => {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
+            if (data.cod) {
+                return console.log(data.message);
+            }
 
             let temperature = data.main.temp;
             $("#temperature").text(temperature + "°C");
         });
-    });
-
-    req.on('error', (e) => {
-        console.log(`problem with request: ${e.message}`);
+    }).on('error', event => {
+        console.log(`problem with request: ${event.message}`);
     });
 };

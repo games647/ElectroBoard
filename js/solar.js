@@ -5,23 +5,42 @@ var http = require('http');
 var querystring = require('querystring');
 
 ipcRenderer.on('config-loaded', (event, config) => {
-    let solarPanelSession = config['solar-panel-session'];
+    let solarPanelPassword = config['solar-panel-password'];
+    let host = config['solar-panel-ip'];
 
-    updateSolarData(solarPanelSession);
-    setInterval(() => {
-        updateSolarData(solarPanelSession);
-    }, 5 * 1000);
+    startNewSession(host, session => {
+        authenticate(host, session, solarPanelPassword);
+
+        updateSolarData(host, session);
+        setInterval(() => {
+            updateSolarData(host, session);
+        }, 5 * 1000);
+    });
 });
 
-function updateSolarData(session) {
+function startNewSession(host, callback) {
+    http.get('http://' + host, res => {
+        console.log(`STATUS: ${res.statusCode}`);
+        let newLocation = res.headers.location;
+
+        //remove the beginning and separate the key from the rest
+        let session = newLocation.substring(0, newLocation.indexOf('&')).replace('/cgi-bin/webgui.cgi?', '');
+
+        callback(session);
+    }).on('error', event => {
+        console.log(`problem with request: ${event.message}`);
+    });
+}
+
+function authenticate(host, session, password) {
     let data = querystring.stringify({
-        'action': 'get.hyb.overview'
+        'Tpassversion': 'entrypw',
+        'Tpass': password
     });
 
     let options = {
-        host: '192.168.0.75',
-        port: 80,
-        path: '/cgi-bin/ipcclient.fcgi?' + session,
+        host: host,
+        path: 'cgi-bin/security.cgi?' + session,
         method: 'POST',
         headers: {
             'Content-Length': Buffer.byteLength(data)
@@ -31,6 +50,32 @@ function updateSolarData(session) {
     let req = http.request(options, res => {
         console.log(`STATUS: ${res.statusCode}`);
 
+        res.on('data', chunk => {
+            console.log(chunk.toString())
+        });
+    }).on('error', event => {
+        console.log(`problem with request: ${event.message}`);
+    });
+
+    req.write(data);
+    req.end();
+}
+
+function updateSolarData(host, session) {
+    let data = querystring.stringify({
+        'action': 'get.hyb.overview'
+    });
+
+    let options = {
+        host: host,
+        path: '/cgi-bin/ipcclient.fcgi?' + session,
+        method: 'POST',
+        headers: {
+            'Content-Length': Buffer.byteLength(data)
+        }
+    };
+
+    let req = http.request(options, res => {
         res.on('data', chunk => {
             let components = chunk.toString().split(/[|]+/);
 
@@ -69,10 +114,8 @@ function updateSolarData(session) {
 
             $("#transferEnergy").text(components[8]);
         });
-    });
-
-    req.on('error', (e) => {
-        console.log(`problem with request: ${e.message}`);
+    }).on('error', event => {
+        console.log(`problem with request: ${event.message}`);
     });
 
     req.write(data);
