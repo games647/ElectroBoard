@@ -60,7 +60,7 @@ function updateFreifunkInfo(nodes, server) {
                 let section = data[i];
                 let target = section.target;
 
-                //begin from the newst
+                //begin from the newest
                 let position = section.datapoints.length - 1;
                 let newest = section.datapoints[position];
                 while (newest != null && newest[0] == null) {
@@ -86,9 +86,11 @@ function updateFreifunkInfo(nodes, server) {
             $("#freifunk-clients").text("Clients: " + clients + "");
             $("#freifunk-up").text("Up: " + tx + " kB/s");
             $("#freifunk-down").text("Down: " + rx + " kB/s");
-        }).on('error', e => {
-            console.log(`Got error: ${e.message}`);
-        });;
+        });
+    });
+
+    req.on('error', (e) => {
+        console.log(`problem with request: ${e.message}`);
     });
 
     req.write(data);

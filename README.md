@@ -13,7 +13,7 @@ There you can display some your favorite data like the daily travel to your work
 
 * Slideshow in fullscreen mode
 * Shows network stats (upstream/downstream) of your Fritzbox
-* Displays solar panel data (power, energy consume, battery, transfer to the energy provider)
+* Displays solar panel data (power, energy consume, battery, transfer to the energy provider) - (solar panel from Bosch)
 * Display the current time and date
 * Display Freifunk clients, upstream and downstream
 * Shows the current temperature

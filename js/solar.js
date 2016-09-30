@@ -21,7 +21,7 @@ function updateSolarData(session) {
     let options = {
         host: '192.168.0.75',
         port: 80,
-        path: '/cgi-bin/ipcclient.fcgi?0' + session,
+        path: '/cgi-bin/ipcclient.fcgi?' + session,
         method: 'POST',
         headers: {
             'Content-Length': Buffer.byteLength(data)
@@ -29,6 +29,8 @@ function updateSolarData(session) {
     };
 
     let req = http.request(options, res => {
+        console.log(`STATUS: ${res.statusCode}`);
+
         res.on('data', chunk => {
             let components = chunk.toString().split(/[|]+/);
 
@@ -66,9 +68,11 @@ function updateSolarData(session) {
             }
 
             $("#transferEnergy").text(components[8]);
-        }).on('error', e => {
-            console.log(`Got error: ${e.message}`);
         });
+    });
+
+    req.on('error', (e) => {
+        console.log(`problem with request: ${e.message}`);
     });
 
     req.write(data);

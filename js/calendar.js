@@ -40,7 +40,7 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
         }
     };
 
-    https.get(options, res => {
+    let req = https.get(options, res => {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
@@ -67,8 +67,10 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
                 $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-time span").text(time);
                 $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-title span").text(name);
             }
-        }).on('error', e => {
-            console.log(`Got error: ${e.message}`);
-        });;
+        });
+    });
+
+    req.on('error', (e) => {
+        console.log(`problem with request: ${e.message}`);
     });
 }
