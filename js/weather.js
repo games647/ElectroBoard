@@ -19,7 +19,7 @@ function updateWeather(apiKey, city) {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
-            if (data.cod) {
+            if (data.cod != 200) {
                 return console.log(data.message);
             }
 
