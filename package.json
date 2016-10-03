@@ -27,12 +27,13 @@
   },
   "homepage": "https://github.com/games647/ElectroBoard",
   "devDependencies": {
-    "electron-prebuilt": "^1.4.1"
+    "electron-prebuilt": "^1.4.2"
   },
   "dependencies": {
-    "dateformat": "1.0.12",
-    "jquery": "3.1.1",
-    "jquery-ui": "1.12.1",
-    "bootstrap": "3.3.7"
+    "bootstrap": "^3.3.7",
+    "dateformat": "^1.0.12",
+    "jquery": "^3.1.1",
+    "jquery-ui": "^1.12.1",
+    "resol-vbus": "^0.15.0"
   }
 }
