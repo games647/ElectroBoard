@@ -30,7 +30,7 @@ This project is open for contributions.
 1. Install NodeJS
 2. Run npm install on the root folder of this project
 
-###About the Fritzbox data
+### About the Fritzbox data
 
 Data is fetched using UPnP. Therefore a little script in Python exists. 
 So you have to install Python too and the used dependency ("pip install pysimplesoap")
