@@ -1,8 +1,8 @@
 //imports
 const {ipcRenderer} = require('electron')
 
-var http = require('http');
-var querystring = require('querystring');
+const http = require('http');
+const querystring = require('querystring');
 
 ipcRenderer.on('config-loaded', (event, config) => {
     let solarPanelPassword = config['solar-panel-password'];
@@ -92,24 +92,25 @@ function updateSolarData(host, session) {
             // var consume = components[6];
 
             let transferType = components[7];
+            let firstChild = $("#transfer .solar-icon div:first-child");
             if (transferType == 'g') {
                 //output
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-up");
 
-                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-output.png')");
-                $("#transfer .solar-icon div:first-child").css('height', "150px");
+                firstChild.css('background-image', "url('img/transfer-output.png')");
+                firstChild.css('height', "150px");
             } else if (transferType == 'r') {
                 //input
                 $("#transferType").prop('class', "glyphicon glyphicon-chevron-down");
 
-                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-input.png')");
-                $("#transfer .solar-icon div:first-child").css('height', "150px");
+                firstChild.css('background-image', "url('img/transfer-input.png')");
+                firstChild.css('height', "150px");
             } else {
                 //e for neutral
                 $("#transferType").prop('class', "glyphicon glyphicon-minus");
 
-                $("#transfer .solar-icon div:first-child").css('background-image', "url('img/transfer-empty.png')");
-                $("#transfer .solar-icon div:first-child").css('height', "150px");
+                firstChild.css('background-image', "url('img/transfer-empty.png')");
+                firstChild.css('height', "150px");
             }
 
             $("#transferEnergy").text(components[8]);
@@ -129,6 +130,7 @@ function updateSolarImage(id, pct) {
     }
 
     $("#" + id + " .solar-icon div:first-child").css('height', imageHeight + "px");
-    $("#" + id + " .solar-icon div:nth-child(2)").css('height', 150 - imageHeight + "px");
-    $("#" + id + " .solar-icon div:nth-child(2)").css('background-position', '0px -' + imageHeight + "px");
+    let secondChild = $("#" + id + " .solar-icon div:nth-child(2)");
+    secondChild.css('height', 150 - imageHeight + "px");
+    secondChild.css('background-position', '0px -' + imageHeight + "px");
 }

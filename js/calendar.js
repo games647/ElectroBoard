@@ -1,9 +1,9 @@
 //imports
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 
-var https = require('https');
-var querystring = require('querystring');
-var dateFormat = require('dateformat');
+const https = require('https');
+const querystring = require('querystring');
+const dateFormat = require('dateformat');
 
 //constants
 const MAX_ENTRIES = 5;
@@ -13,15 +13,15 @@ ipcRenderer.on('config-loaded', (event, config) => {
     let xchangeSecret = config['xchange-secret'];
     let calendarSession = config['calendar-session'];
 
-    updateCalendar(xchangePrefix, xchangeSecret, calendarSession)
+    updateCalendar(xchangePrefix, xchangeSecret, calendarSession);
     setInterval(() => {
         updateCalendar(xchangePrefix, xchangeSecret, calendarSession);
     }, 60 * 60 * 1000);
 });
 
 function updateCalendar(xchangePrefix, xchangeSecret, session) {
-    var now = new Date().getTime();
-    var data = querystring.stringify({
+    let now = new Date().getTime();
+    let data = querystring.stringify({
         'action': 'all',
         'columns': '200,201,202,400',
         'start': now,
@@ -30,7 +30,7 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
         'session': session
     });
 
-    var options = {
+    let options = {
         host: 'mailxchange.de',
         path: '/appsuite/api/calendar?' + data,
         headers: {
@@ -38,7 +38,7 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
         }
     };
 
-    let req = https.get(options, res => {
+    https.get(options, res => {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
@@ -50,20 +50,21 @@ function updateCalendar(xchangePrefix, xchangeSecret, session) {
             let events = data.data;
 
             //hide all entries to remove outdated ones
+            let calendarEl = $("#calendar-content");
             for (let row = 0; row < MAX_ENTRIES; ++row) {
-                $("#calendar-content .row:nth-child(" + (row + 1) + ")").hide();
+                calendarEl.find(".row:nth-child(" + (row + 1) + ")").hide();
             }
 
-            for (let row = 0; row < events.length || row == MAX_ENTRIES; ++row) {
+            for (let row = 0; row < events.length || row === MAX_ENTRIES; ++row) {
                 let event = events[row];
                 let name = event[0];
                 let eventStart = event[1];
-                let end = event[2];
+                // let end = event[2];
 
-                var time = dateFormat(eventStart, 'd / m HH:MM');
-                $("#calendar-content .row:nth-child(" + (row + 1) + ")").show();
-                $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-time span").text(time);
-                $("#calendar-content .row:nth-child(" + (row + 1) + ") .calendar-title span").text(name);
+                let time = dateFormat(eventStart, 'd / m HH:MM');
+                calendarEl.find(".row:nth-child(" + (row + 1) + ")").show();
+                calendarEl.find(".row:nth-child(" + (row + 1) + ") .calendar-time span").text(time);
+                calendarEl.find(".row:nth-child(" + (row + 1) + ") .calendar-title span").text(name);
             }
         });
     }).on('error', event => {

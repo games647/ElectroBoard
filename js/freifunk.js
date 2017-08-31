@@ -1,9 +1,9 @@
 //imports
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 
-var https = require('https');
-var querystring = require('querystring');
-var util = require('util');
+const https = require('https');
+const querystring = require('querystring');
+const util = require('util');
 
 //consts
 const CLIENT_FORMAT = "freifunk.%s.clients";
@@ -14,7 +14,7 @@ ipcRenderer.on('config-loaded', (event, config) => {
     let freifunkNodes = config['freifunk-nodes'];
     let statsServer = config['freifunk-stats-server'];
 
-    updateFreifunkInfo(freifunkNodes, statsServer)
+    updateFreifunkInfo(freifunkNodes, statsServer);
     setInterval(() => {
         updateFreifunkInfo(freifunkNodes, statsServer)
     }, 60 * 1000);
@@ -30,7 +30,7 @@ function updateFreifunkInfo(nodes, server) {
         targets.push(util.format(TX_FORMAT, node));
     }
 
-    var data = querystring.stringify({
+    let data = querystring.stringify({
         'target': targets,
         'from': "-5min",
         'until': "now",
@@ -38,7 +38,7 @@ function updateFreifunkInfo(nodes, server) {
         'maxDataPoints': '100'
     });
 
-    var options = {
+    let options = {
         host: server,
         port: 443,
         path: '/graphite/render',
@@ -48,7 +48,7 @@ function updateFreifunkInfo(nodes, server) {
         }
     };
 
-    var req = https.request(options, res => {
+    let req = https.request(options, res => {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
@@ -63,12 +63,11 @@ function updateFreifunkInfo(nodes, server) {
                 //begin from the newest
                 let position = section.datapoints.length - 1;
                 let newest = section.datapoints[position];
-                while (newest != null && newest[0] == null) {
+                while (newest !== null && newest[0] === null) {
                     newest = section.datapoints[--position];
-                    continue;
                 }
 
-                if (newest == null) {
+                if (newest === null) {
                     continue;
                 }
 
@@ -93,4 +92,4 @@ function updateFreifunkInfo(nodes, server) {
 
     req.write(data);
     req.end();
-};
+}

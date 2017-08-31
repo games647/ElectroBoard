@@ -1,12 +1,12 @@
 //imports
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 
-var fs = require('fs');
-var dateFormat = require('dateformat');
-var exec = require('child_process').exec;
+const fs = require('fs');
+const dateFormat = require('dateformat');
+const exec = require('child_process').exec;
 
-var imageId = 1;
-var isBoardShowing = true;
+let imageId = 1;
+let isBoardShowing = true;
 
 ipcRenderer.on('config-loaded', (event, config) => {
     let mapsAPI = config['google-maps-api'];
@@ -40,8 +40,9 @@ function switchBackground() {
             $("#background").animate({
                 opacity: 0.0
             }, 3000, () => {
-                $("#background").css('background-image', 'url(' + path + ')');
-                $("#background").animate({
+                let background = $("#background");
+                background.css('background-image', 'url(' + path + ')');
+                background.animate({
                     opacity: 1
                 }, 3000);
             });
@@ -95,5 +96,5 @@ function updateTime() {
 function setMapsImage(mapsApiKey, origin, destination) {
     let url = "https://www.google.com/maps/embed/v1/directions?" +
         "key=" + mapsApiKey + "&origin=" + origin + "&destination=" + destination;
-    $("#map iframe").prop('src', url);
+    $("#map").find("iframe").prop('src', url);
 }

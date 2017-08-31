@@ -1,7 +1,7 @@
 //imports
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 
-var http = require('http');
+const http = require('http');
 
 ipcRenderer.on('config-loaded', (event, config) => {
     let apiKey = config['openweathermap-api'];
@@ -19,7 +19,7 @@ function updateWeather(apiKey, city) {
         res.on('data', chunk => {
             let data = JSON.parse(chunk);
             console.log(data);
-            if (data.cod != 200) {
+            if (data.cod !== 200) {
                 return console.log(data.message);
             }
 
@@ -29,4 +29,4 @@ function updateWeather(apiKey, city) {
     }).on('error', event => {
         console.log(`problem with request: ${event.message}`);
     });
-};
+}
