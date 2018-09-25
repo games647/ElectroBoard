@@ -17,7 +17,7 @@ ipcRenderer.on('config-loaded', (event, config) => {
     updateFreifunkInfo(freifunkNodes, statsServer);
     setInterval(() => {
         updateFreifunkInfo(freifunkNodes, statsServer)
-    }, 60 * 1000);
+    }, 15 * 60 * 1000);
 });
 
 function updateFreifunkInfo(nodes, server) {
